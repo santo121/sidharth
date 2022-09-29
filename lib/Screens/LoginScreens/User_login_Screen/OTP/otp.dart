@@ -26,7 +26,7 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primoryColor,
+      backgroundColor: primaryColor,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar12(title: "Penalty System", autoAppbar: false),

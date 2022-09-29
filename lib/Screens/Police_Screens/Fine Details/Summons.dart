@@ -18,7 +18,7 @@ class Summons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primoryColor,
+      backgroundColor: primaryColor,
       appBar: PreferredSize(
           child: AppBar12(title: "SUMMONS", autoAppbar: true),
           preferredSize: Size.fromHeight(60)),

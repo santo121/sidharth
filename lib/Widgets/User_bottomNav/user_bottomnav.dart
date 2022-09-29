@@ -15,7 +15,7 @@ class UserBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: primoryColor,
+        backgroundColor: primaryColor,
         bottomNavigationBar: const UserBottomIcons(),
         appBar: AppBar(
           shape: const Border(
@@ -49,7 +49,7 @@ class UserBottomNav extends StatelessWidget {
                 icon: const Icon(Icons.logout))
           ],
           automaticallyImplyLeading: false,
-          backgroundColor: primoryColor,
+          backgroundColor: primaryColor,
         ),
         body: ValueListenableBuilder(
           valueListenable: selectedIndex,

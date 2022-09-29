@@ -7,7 +7,7 @@ class Fine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primoryColor,
+      backgroundColor: primaryColor,
       appBar: PreferredSize(
           child: AppBar12(title: "Fine and Summons", autoAppbar: false),
           preferredSize: Size.fromHeight(60)),

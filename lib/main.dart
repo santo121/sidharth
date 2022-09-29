@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sidarth_new/Screens/Police_Screens/Edit_Profile/police_profile_control.dart';
 import 'package:sidarth_new/Screens/SplashScreen/splashscreen.dart';
+import 'package:sidarth_new/Screens/User_Screens/Edit_Profile/edit_profile_controler.dart';
+
+import 'Screens/LoginScreens/addmin_login_Screen/login_controller.dart';
+import 'Screens/Police_Screens/Fine Details/fine_controller.dart';
 
 void main() {
   runApp(const MYapp());
@@ -10,6 +16,15 @@ class MYapp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: SplashScreen());
+    return MultiProvider(
+      providers: [
+          ChangeNotifierProvider(create: (_) => EditUserProfile()),
+          ChangeNotifierProvider(create: (_) => PoliceProfileControl()),
+          ChangeNotifierProvider(create: (_) => FineController()),
+          ChangeNotifierProvider(create: (_) => LoginController()),
+
+      ],
+      child: const MaterialApp(home: SplashScreen()),
+    );
   }
 }

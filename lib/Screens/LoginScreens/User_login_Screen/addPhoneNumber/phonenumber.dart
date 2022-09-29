@@ -23,7 +23,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primoryColor,
+      backgroundColor: primaryColor,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar12(title: "Penalty System", autoAppbar: false),

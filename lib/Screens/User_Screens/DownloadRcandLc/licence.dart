@@ -11,7 +11,7 @@ class Licence extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primoryColor,
+      backgroundColor: primaryColor,
       body: Padding(
         padding: EdgeInsets.all(20),
         child: Column(

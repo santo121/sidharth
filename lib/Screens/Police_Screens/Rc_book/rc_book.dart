@@ -9,7 +9,7 @@ class RcBook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primoryColor,
+      backgroundColor: primaryColor,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: AppBar12(title: "RC Book", autoAppbar: true),
@@ -80,7 +80,7 @@ class RcBook extends StatelessWidget {
                     MyWidget2(
                         name: "Tax Valid\nUpTo", width: 60, sacondNmae: "1"),
                     MyWidget2(
-                        name: "PUCC Valid\nUpTo", width: 48, sacondNmae: "1"),
+                        name: "P.U.U.C Valid\nUpTo", width: 48, sacondNmae: "1"),
                   ],
                 ),
               ),
@@ -95,10 +95,10 @@ class RcBook extends StatelessWidget {
                     child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => FineDetails(),
+                            builder: (context) =>const FineDetails(vehicleNumber: "KL 45 J 2332"),
                           ));
                         },
-                        child: Text("Fine ")),
+                        child:const Text("Fine ")),
                   ),
                   ElevatedButton(
                       onPressed: () {
@@ -106,7 +106,7 @@ class RcBook extends StatelessWidget {
                           builder: (context) => Summons(),
                         ));
                       },
-                      child: Text("Summons"))
+                      child:const Text("Summons"))
                 ],
               ))
             ],

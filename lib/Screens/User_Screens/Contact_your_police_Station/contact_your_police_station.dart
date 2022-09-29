@@ -12,7 +12,7 @@ class _ContactpoliceStationState extends State<ContactpoliceStation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: primoryColor,
+        backgroundColor: primaryColor,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60),
           child: AppBar12(title: "Contact Police Station", autoAppbar: true),

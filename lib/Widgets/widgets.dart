@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final primoryColor = Color.fromARGB(131, 5, 30, 100);
+final primaryColor = Color.fromARGB(131, 5, 30, 100);
 
 class MyText2 extends StatelessWidget {
   MyText2(
@@ -55,7 +55,7 @@ class AppBar12 extends StatelessWidget {
           left: BorderSide(color: Colors.white, width: 0.5),
           right: BorderSide(color: Colors.white, width: 0.5)),
       shadowColor: Colors.white,
-      backgroundColor: primoryColor,
+      backgroundColor: primaryColor,
       title: Row(
         children: [
           const SizedBox(

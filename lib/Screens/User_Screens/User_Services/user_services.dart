@@ -7,7 +7,7 @@ class Services extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primoryColor,
+      backgroundColor: primaryColor,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(60),
           child: AppBar12(title: "Services", autoAppbar: true)),

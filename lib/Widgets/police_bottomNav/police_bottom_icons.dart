@@ -13,7 +13,7 @@ class PoliceBottomIcons extends StatelessWidget {
         builder: (BuildContext ctx, int update, Widget? _) {
           return BottomNavigationBar(
               selectedItemColor: Colors.blue,
-              unselectedItemColor: primoryColor,
+              unselectedItemColor: primaryColor,
               currentIndex: update,
               onTap: (value) {
                 selectedIndex.value = value;

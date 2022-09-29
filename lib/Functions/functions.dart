@@ -119,7 +119,7 @@ Future<void> popUpPage1(BuildContext context) async {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
                     Text(
-                      "Offence",
+                      "Offense",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,

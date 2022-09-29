@@ -21,7 +21,7 @@ class PoliceBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: primoryColor,
+        backgroundColor: primaryColor,
         bottomNavigationBar: const PoliceBottomIcons(),
         appBar: AppBar(
           shape: const Border(
@@ -55,7 +55,7 @@ class PoliceBottomNav extends StatelessWidget {
                 icon: const Icon(Icons.logout))
           ],
           automaticallyImplyLeading: false,
-          backgroundColor: primoryColor,
+          backgroundColor: primaryColor,
         ),
         body: ValueListenableBuilder(
           valueListenable: selectedIndex,
