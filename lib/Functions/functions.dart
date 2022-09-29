@@ -51,23 +51,7 @@ Future<void> fineNotPaid(BuildContext context) async {
 
 // scan qr code//
 
-scan(BuildContext context) async {
-  late String data;
 
-  await FlutterBarcodeScanner.scanBarcode(
-          "#000000", "Cancel", true, ScanMode.BARCODE)
-      .then((value) {
-    data = value;
-    if (data.isNotEmpty) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const RcBook(),
-      ));
-    } else if (data.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Cant Read Qr code")));
-    }
-  });
-}
 
 // Splash Screen
 
