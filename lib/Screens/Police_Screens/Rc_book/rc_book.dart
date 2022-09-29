@@ -4,7 +4,30 @@ import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/fine_details.d
 import 'package:sidarth_new/Widgets/widgets.dart';
 
 class RcBook extends StatelessWidget {
-  const RcBook({super.key});
+  RcBook(
+      {super.key,
+      required this.fitnessValUpTo,
+      required this.fuelType,
+      required this.insuranceVal,
+      required this.ownerName,
+      required this.puccVal,
+      required this.rcStatus,
+      required this.registrationDate,
+      required this.reqAuth,
+      required this.taxVal,
+      required this.vecClass,
+      required this.vehicleAge});
+  String? ownerName,
+      reqAuth,
+      vecClass,
+      rcStatus,
+      fuelType,
+      vehicleAge,
+      registrationDate,
+      fitnessValUpTo,
+      insuranceVal,
+      taxVal,
+      puccVal;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +103,9 @@ class RcBook extends StatelessWidget {
                     MyWidget2(
                         name: "Tax Valid\nUpTo", width: 60, sacondNmae: "1"),
                     MyWidget2(
-                        name: "P.U.U.C Valid\nUpTo", width: 48, sacondNmae: "1"),
+                        name: "P.U.U.C Valid\nUpTo",
+                        width: 48,
+                        sacondNmae: "1"),
                   ],
                 ),
               ),
@@ -95,10 +120,11 @@ class RcBook extends StatelessWidget {
                     child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>const FineDetails(vehicleNumber: "KL 45 J 2332"),
+                            builder: (context) => const FineDetails(
+                                vehicleNumber: "KL 45 J 2332"),
                           ));
                         },
-                        child:const Text("Fine ")),
+                        child: const Text("Fine ")),
                   ),
                   ElevatedButton(
                       onPressed: () {
@@ -106,7 +132,7 @@ class RcBook extends StatelessWidget {
                           builder: (context) => Summons(),
                         ));
                       },
-                      child:const Text("Summons"))
+                      child: const Text("Summons"))
                 ],
               ))
             ],

@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sidarth_new/Screens/LoginScreens/addmin_login_Screen/login_controller.dart';
+import 'package:sidarth_new/Screens/LoginScreens/addmin_login_Screen/login_service.dart';
 import 'package:sidarth_new/Screens/Police_Screens/Edit_Profile/edit_profile.dart';
 import 'package:sidarth_new/Widgets/police_bottomNav/bottomnav.dart';
 import 'package:sidarth_new/Widgets/widgets.dart';
@@ -80,8 +83,15 @@ class AddminLogin extends StatelessWidget {
                     onPressed: () {
                       // updateAnswer(context);
                       if(myModel.loginUser!=null&&myModel.password!=null){
-                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context) => PoliceBottomNav() ), (route) => false);
+                        LogoInService server =LogoInService();
+                        server.callLoginService(myModel.toJson()).then((value) => {
+                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context) => PoliceBottomNav() ), (route) => false)
+                          
+                        });
+        
+
                       }
+                      else{log(myModel.toJson().toString());}
                     },
                     child: const Center(
                       child: Text(
