@@ -8,10 +8,9 @@ import '../../Screens/AddminScreen/addmin_screen.dart';
 import '../../Screens/User_Screens/Usre_Home_Screen/user_home_screen.dart';
 
 class UserBottomNav extends StatelessWidget {
-  UserBottomNav({super.key});
-
-  final pages = [Number(), UserProfile()];
-
+  UserBottomNav({super.key,});
+  final pages = [Number(), const UserProfile()];
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(

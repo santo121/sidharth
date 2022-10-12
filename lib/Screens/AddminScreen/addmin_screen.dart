@@ -40,7 +40,7 @@ class AddminScreen extends StatelessWidget {
           TextButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => PhoneNumber(),
+                builder: (context) => PhoneNumber()
               ));
             },
             child: Container(

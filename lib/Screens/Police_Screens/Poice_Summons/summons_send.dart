@@ -1,49 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:sidarth_new/Screens/Police_Screens/Poice_Summons/police_summons_service.dart';
 import 'package:sidarth_new/Widgets/widgets.dart';
 
 class SummonsSend extends StatelessWidget {
-  const SummonsSend({super.key});
-
+  SummonsSend({super.key});
+ GetPoliceSummonsList getSummons =  GetPoliceSummonsList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: primaryColor,
-        body: SafeArea(
-            child: Padding(
-          padding: const EdgeInsets.all(35),
-          child: Column(children: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        "Name :",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'Date :',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  MyText2(name1: "Reg No :", width: 90, name2: "1"),
-                  MyText2(name1: "Offense :", width: 90, name2: "1"),
-                  MyText2(name1: "Amount :", width: 91, name2: "1"),
-                  MyText2(name1: "Type Of Transaction", width: 20, name2: "1"),
-                  MyText2(name1: "Phone number", width: 53, name2: "1"),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.browse_gallery))
-                ],
-              ),
-            ),
-          ]),
-        )));
+        body:SafeArea(
+          child: FutureBuilder(
+            future: getSummons.getPoliceSummonsList(),
+            builder: (context,snapShot) {
+              if(snapShot.hasData){
+                return
+               ListView.builder(
+                itemCount: snapShot.data!.data!.length,
+                 itemBuilder: (context,index) {
+                  final response = snapShot.data!.data;
+                   return Padding(
+                    padding: const EdgeInsets.all(35),
+                    child: Column(children: [
+                   Container(
+                     padding: const EdgeInsets.all(20),
+                     color: Colors.white,
+                     child: Column(
+                       crossAxisAlignment: CrossAxisAlignment.stretch,
+                       children: [
+                         Row(
+                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           children: [
+                             Text(
+                               "Name : ${response![index].name}",
+                               style: TextStyle(fontWeight: FontWeight.bold),
+                             ),
+                             Text(
+                               'Date : ${response[index].date}',
+                               style: TextStyle(fontWeight: FontWeight.bold),
+                             )
+                           ],
+                         ),
+                         const SizedBox(
+                           height: 15,
+                         ),
+                         MyText2(name1: "RC id :", width: 90, name2: response[index].rcId.toString()),
+                         MyText2(name1: "Offense :", width: 90, name2: response[index].offenseId.toString()),
+                         MyText2(name1: "Phone number", width: 53, name2:response[index].phoneNumber.toString() ),
+                         IconButton(onPressed: () {}, icon: Icon(Icons.browse_gallery))
+                       ],
+                     ),
+                   ),
+                    ]),
+              );
+                 }
+               );
+              }
+              else{
+                return const Center(child:CircularProgressIndicator());
+              }
+              
+            }
+          ),
+        ));
   }
 }

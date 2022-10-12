@@ -33,30 +33,48 @@ class PoliceHomeScreen extends StatelessWidget {
                     await FlutterBarcodeScanner.scanBarcode(
                             "#000000", "Cancel", true, ScanMode.BARCODE)
                         .then((value) async {
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //       builder: (context) => RcBook(
+                      //         fuelType: "",
+                      //         insuranceVal: '',
+                      //         ownerName: '',
+                      //         pollutionVal: '',
+                      //         rcStatus: '',
+                      //         registrationDate: '',
+                      //         reqAuth: '',
+                      //         taxVal: '',
+                      //         vecClass: '',
+                      //       ),
+                      //     ));
+
                       await qrService
                           .qrCodeScannerService(url: value)
-                          .then((value) => {
-                            
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => RcBook(
-                                    fitnessValUpTo: value
-                                        .data![0].pollutionvalidupto
-                                        .toString(),
-                                    fuelType: "",
-                                    insuranceVal: '',
-                                    ownerName: '',
-                                    puccVal: '',
-                                    rcStatus: '',
-                                    registrationDate: '',
-                                    reqAuth: '',
-                                    taxVal: '',
-                                    vecClass: '',
-                                    vehicleAge: '',
-                                  ),
-                                ))
-                              });
-                      //     log(value);
-                      // myModel.changeScannerVal(value);
+                          .then((value) {
+                        final data = value.data![0];
+                        if (value.data == "No data Found") {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("Qr code is not valid"),
+                          ));
+                        } else {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => RcBook(
+                              rcNum: data.rcId.toString(),
+                              fuelType: 'petrol',
+                              insuranceVal: data.insurancevalidupto.toString(),
+                              ownerName: 'Stefin',
+                              pollutionVal: data.pollutionvalidupto.toString(),
+                              rcStatus: data.rcStatus,
+                              registrationDate: data.registernumber.toString(),
+                              reqAuth: "Thrissur",
+                              taxVal: data.taxvalidupto.toString(),
+                              vecClass: 'Four wheeler',
+                            ),
+                          ));
+                        }
+                      });
+                      log(value);
+                      myModel.changeScannerVal(value);
                     });
                   },
                   child: const Text("Scan Vehicle Rc")),

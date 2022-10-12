@@ -1,29 +1,21 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-
-class QrCodeService {
-  Future<QrCodeModel> qrCodeScannerService({required String url}) async {
-    final response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      return QrCodeModel.fromJson(json.decode(response.body));
-    } else {
-      return throw Exception(response.statusCode);
-    }
+class SendPhoneForRc{
+  String phone;
+  SendPhoneForRc({required this.phone});
+  Map<String,String> toJson(){
+    return {
+        "phone":phone.toString()
+    };
   }
 }
 
-// To parse this JSON data, do
-//
-//     final qrCodeModel = qrCodeModelFromJson(jsonString);
 
-class QrCodeModel {
+class UserRcDetails {
   List<Data>? data;
-
-  QrCodeModel({this.data});
-
-  QrCodeModel.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
+  int? statusCode;
+  UserRcDetails({this.data});
+  UserRcDetails.rcStatusCode({required this.statusCode});
+  UserRcDetails.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null||json['data'] !="No data Found ") {
       data = <Data>[];
       json['data'].forEach((v) {
         data!.add(new Data.fromJson(v));
@@ -96,5 +88,3 @@ class Data {
     return data;
   }
 }
-
-

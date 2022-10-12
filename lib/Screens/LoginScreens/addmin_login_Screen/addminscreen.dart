@@ -82,13 +82,29 @@ class AddminLogin extends StatelessWidget {
                 ElevatedButton(
                     onPressed: () {
                       // updateAnswer(context);
+                      log(myModel.toJson().toString());
                       if(myModel.loginUser!=null&&myModel.password!=null){
+
+                        // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context) => PoliceBottomNav() ), (route) => false);
                         LogoInService server =LogoInService();
-                        server.callLoginService(myModel.toJson()).then((value) => {
-                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context) => PoliceBottomNav() ), (route) => false)
-                          
+                        server.callLoginService(myModel.toJson()).then((value) async{
+                         if( value.statusCode==null){
+                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context) => PoliceBottomNav() ), (route) => false);
+                       final response = await SharedPreferences.getInstance();
+                       await response.setString("station_name",value.data!.stationName.toString());
+                       await response.setString("postoffice",value.data!.place.toString());
+                       await response.setString("pin",value.data!.pin.toString());
+                       await response.setString("phone_number",value.data!.pin.toString());
+                       await response.setString("PS_place",value.data!.pin.toString());
+                         }
+                         else{
+                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+  content: Text("You'r password incorrect"),
+));
+                         }
+                        
                         });
-        
+        log("message");
 
                       }
                       else{log(myModel.toJson().toString());}

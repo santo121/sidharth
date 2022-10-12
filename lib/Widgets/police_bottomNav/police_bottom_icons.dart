@@ -3,18 +3,24 @@ import 'package:sidarth_new/Widgets/widgets.dart';
 
 ValueNotifier<int> selectedIndex = ValueNotifier(0);
 
+
+ 
 class PoliceBottomIcons extends StatelessWidget {
-  const PoliceBottomIcons({super.key});
+  final int pageIndex ;
+   PoliceBottomIcons({super.key, this.pageIndex = 0});
+  
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
         valueListenable: selectedIndex,
+
         builder: (BuildContext ctx, int update, Widget? _) {
+          
           return BottomNavigationBar(
               selectedItemColor: Colors.blue,
               unselectedItemColor: primaryColor,
-              currentIndex: update,
+              currentIndex:update,
               onTap: (value) {
                 selectedIndex.value = value;
               },

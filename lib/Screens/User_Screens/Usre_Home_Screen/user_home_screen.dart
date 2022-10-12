@@ -3,11 +3,12 @@ import 'package:sidarth_new/Screens/Police_Screens/Fine%20AND%20SEMANCE/fine.dar
 import 'package:sidarth_new/Screens/User_Screens/Contact_your_police_Station/contact_your_police_station.dart';
 import 'package:sidarth_new/Screens/User_Screens/DownloadRcandLc/downloadrc_and_lc.dart';
 import 'package:sidarth_new/Screens/User_Screens/User_Services/user_services.dart';
+import 'package:sidarth_new/Screens/User_Screens/Usre_Home_Screen/list_of_summons.dart';
 import 'package:sidarth_new/Widgets/widgets.dart';
 
-class UsreHomeScreen extends StatelessWidget {
-  const UsreHomeScreen({super.key});
-
+class UserHomeScreen extends StatelessWidget {
+  const UserHomeScreen({super.key,required this.userId});
+final String userId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,13 +25,28 @@ class UsreHomeScreen extends StatelessWidget {
             ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => Fine(),
+                    builder: (context) => Fine(userId:userId,)
+                      // amount: amount, name: name, offense: offense, regNo: regNo, typeOfTransaction: typeOfTransaction
+                      // ),
                   ));
                 },
-                child: const Text("PAY FINE Summonse")),
+                child: const Text("PAY FINE")),
+                const SizedBox(
+              height: 10,
+            ),
+                ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>  SummonsList(rcId: userId,)
+                      // amount: amount, name: name, offense: offense, regNo: regNo, typeOfTransaction: typeOfTransaction
+                      // ),
+                  ));
+                },
+                child: const Text("Receive summons")),
             const SizedBox(
               height: 10,
             ),
+            
             ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(

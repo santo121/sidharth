@@ -14,7 +14,7 @@ class LoginController with ChangeNotifier{
 
     Map<String,String?> toJson(){
       return {
-        "phone":loginUser,
+        "username":loginUser,
         "password":password,
       };
     }

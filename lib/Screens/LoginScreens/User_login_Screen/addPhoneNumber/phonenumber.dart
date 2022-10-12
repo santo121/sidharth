@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sidarth_new/Screens/LoginScreens/User_login_Screen/OTP/otp.dart';
@@ -5,6 +7,8 @@ import 'package:sidarth_new/Widgets/widgets.dart';
 
 class PhoneNumber extends StatefulWidget {
   PhoneNumber({super.key});
+// final FirebaseUser user;
+
 
   @override
   State<PhoneNumber> createState() => _PhoneNumberState();
@@ -13,6 +17,12 @@ class PhoneNumber extends StatefulWidget {
 class _PhoneNumberState extends State<PhoneNumber> {
   String number = '0000000000';
 
+Future<void> initializeDefault() async {
+    FirebaseApp app = await Firebase.initializeApp(
+      
+    );
+    print('Initialized default app $app');
+  }
   final phone = TextEditingController();
 
   bool isDataMatched = true;
@@ -20,6 +30,10 @@ class _PhoneNumberState extends State<PhoneNumber> {
 
   final _fromkey = GlobalKey<FormState>();
 
+@override
+void initState() {
+  super.initState();
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +74,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
               height: 10,
             ),
             ElevatedButton(
-                onPressed: () {
+                onPressed: (){
                   setState(() {
                     if (phone.text.isEmpty) {
                       isLoading = true;
@@ -69,9 +83,16 @@ class _PhoneNumberState extends State<PhoneNumber> {
                     } else {
                       isLoading = false;
                     }
-                    CheckLogin(context);
+                  // verifyPhoneNum();
+                    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => OtpScreen(phoneNum: phone.value.text),
+      ));
+                    // CheckLogin(context);
                     _fromkey.currentState!.validate();
-                  });
+
+                  },
+                  );
+
                 },
                 child: isLoading
                     ? const Text("Sent")
@@ -89,8 +110,37 @@ class _PhoneNumberState extends State<PhoneNumber> {
     if (number.length == phone.text.length) {
       await Future.delayed(Duration(seconds: 5));
       Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => OtpScreen(),
+        builder: (context) => OtpScreen(phoneNum: phone.value.text),
       ));
     }
   }
+
+  Future<void> verifyPhoneNum()async{
+  await Firebase.initializeApp();
+    
+await FirebaseAuth.instance.verifyPhoneNumber(
+  phoneNumber:"+91${phone.text}" ,
+  verificationCompleted:(PhoneAuthCredential val)async{
+    print(val.smsCode.toString());
+    await FirebaseAuth.instance.signInWithCredential(val);
+    }, 
+   verificationFailed: (FirebaseAuthException e) {
+          final snackBar = SnackBar(content: Text("${e.message}"));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        },
+ codeSent: (verficationId,resendToken) {
+          // setState(() {
+          //   codeSent = true;
+          //   verId = verficationId;
+          // });
+        },
+  codeAutoRetrievalTimeout: (String verificationId) {
+          // setState(() {
+          //   verId = verificationId;
+          // });
+        },
+        timeout: Duration(seconds: 60));
+  }
+
+  
 }

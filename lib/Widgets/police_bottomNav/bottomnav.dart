@@ -9,8 +9,10 @@ import 'package:sidarth_new/Widgets/police_bottomNav/police_bottom_icons.dart';
 import 'package:sidarth_new/Widgets/widgets.dart';
 
 class PoliceBottomNav extends StatelessWidget {
-  PoliceBottomNav({super.key});
+  final int pageIndex;
 
+  PoliceBottomNav({super.key ,this.pageIndex=0});
+  // PloiceBottomNav({});
   final pages = [
     PoliceHomeScreen(),
     Transations(),
@@ -22,7 +24,7 @@ class PoliceBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: primaryColor,
-        bottomNavigationBar: const PoliceBottomIcons(),
+        bottomNavigationBar: PoliceBottomIcons(pageIndex: pageIndex),
         appBar: AppBar(
           shape: const Border(
               bottom: BorderSide(color: Colors.white, width: 0.5),

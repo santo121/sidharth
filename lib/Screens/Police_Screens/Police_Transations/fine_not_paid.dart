@@ -51,7 +51,7 @@ class FineNotPaid extends StatelessWidget {
                   fineNotPaid(context);
                 },
                 child: const Text(
-                  "Send As Semance",
+                  "Send As Summons",
                   style: TextStyle(color: Colors.white),
                 ),
               ),

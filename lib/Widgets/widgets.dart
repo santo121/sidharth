@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/fine_controller.dart';
 
 final primaryColor = Color.fromARGB(131, 5, 30, 100);
 
@@ -6,11 +10,11 @@ class MyText2 extends StatelessWidget {
   MyText2(
       {super.key,
       required this.name1,
-      required this.width,
+      this.width,
       required this.name2});
 
   String name1;
-  double width;
+  double? width;
   String name2;
 
   @override
@@ -71,7 +75,8 @@ class AppBar12 extends StatelessWidget {
             width: 20,
           ),
           Text(title,
-              style: const TextStyle(fontSize: 20, color: Colors.white)),
+              style: const TextStyle(fontSize: 20, color: Colors.white),
+              ),
         ],
       ),
     );
@@ -88,64 +93,72 @@ class DropButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: items,
-      builder: (BuildContext ctx, List<String> updatedValue, Widget? _) {
-        return DropdownButton<String>(
-          focusColor: Colors.white,
-          value: selectedItem,
-          items: updatedValue
-              .map((item) => DropdownMenuItem<String>(
-                  value: item,
-                  child: Text(
-                    item,
-                    style: const TextStyle(
-                        fontSize: 17, fontWeight: FontWeight.w300),
-                  )))
-              .toList(),
-          onChanged: (item) {
-            if (item == null) {
-              return;
-            }
-            selectedItem = item;
-            items.notifyListeners();
+    return Consumer<FineController>(
+              builder: (context,myModel,child) {
+        return ValueListenableBuilder(
+          valueListenable: items,
+          builder: (BuildContext ctx, List<String> updatedValue, Widget? _) {
+            return DropdownButton<String>(
+              focusColor: Colors.white,
+              value: myModel.modeOfFine,
+              items: myModel.payMode
+                  .map((item) => DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(
+                        item,
+                        style: const TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w300),
+                      )))
+                  .toList(),
+              onChanged: (item) {
+                
+                if (item == null) {
+                  return;
+                }
+                myModel.changeModeOfFine(item);
+                log(myModel.modeOfFine.toString());
+                // selectedItem = item;
+                // items.notifyListeners();
+                
+              },
+            );
           },
         );
-      },
+      }
     );
   }
 }
 
-class CheckButton extends StatelessWidget {
-  CheckButton({super.key, required this.title});
+// class CheckButton extends StatelessWidget {
+//   CheckButton({super.key, required this.title});
 
-  ValueNotifier<bool> value1 = ValueNotifier(false);
-  String title;
+//  final ValueNotifier<bool> value1 = ValueNotifier(false);
+//  final String title;
 
-  @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-        valueListenable: value1,
-        builder: (BuildContext ctx, bool updatedValue, Widget? _) {
-          return ListTile(
-            leading: Checkbox(
-              side: const BorderSide(color: Colors.white),
-              value: updatedValue,
-              onChanged: (value) {
-                if (value == null) {
-                  return;
-                }
-                value1.value = value;
-              },
-            ),
-            title: Text(
-              title,
-              style: const TextStyle(color: Colors.white),
-            ),
-          );
-        });
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return ValueListenableBuilder(
+//         valueListenable: value1,
+//         builder: (BuildContext ctx, bool updatedValue, Widget? _) {
+//           return ListTile(
+//             leading: Checkbox(
+//               side: const BorderSide(color: Colors.white),
+//               value: updatedValue,
+//               onChanged: (value) {
+//                 if (value == null) {
+//                   return;
+//                 }
+//                 value1.value = value;
+//               },
+//             ),
+//             title: Text(
+//               title,
+//               style: const TextStyle(color: Colors.white),
+//             ),
+//           );
+//         });
+//   }
+// }
 
 class Text1 extends StatelessWidget {
   Text1({super.key, required this.text});

@@ -4,30 +4,29 @@ import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/fine_details.d
 import 'package:sidarth_new/Widgets/widgets.dart';
 
 class RcBook extends StatelessWidget {
-  RcBook(
-      {super.key,
-      required this.fitnessValUpTo,
-      required this.fuelType,
-      required this.insuranceVal,
-      required this.ownerName,
-      required this.puccVal,
-      required this.rcStatus,
-      required this.registrationDate,
-      required this.reqAuth,
-      required this.taxVal,
-      required this.vecClass,
-      required this.vehicleAge});
+  RcBook({
+    super.key,
+    required this.fuelType,
+    required this.insuranceVal,
+    required this.ownerName,
+    required this.pollutionVal,
+    required this.rcStatus,
+    required this.registrationDate,
+    required this.reqAuth,
+    required this.taxVal,
+    required this.vecClass,
+    required this.rcNum
+  });
   String? ownerName,
       reqAuth,
       vecClass,
       rcStatus,
       fuelType,
-      vehicleAge,
       registrationDate,
-      fitnessValUpTo,
       insuranceVal,
       taxVal,
-      puccVal;
+      pollutionVal,
+      rcNum;
 
   @override
   Widget build(BuildContext context) {
@@ -82,30 +81,25 @@ class RcBook extends StatelessWidget {
                     const Divider(
                       color: Colors.black,
                     ),
-                    MyWidget2(name: "Owner Name :", width: 18, sacondNmae: "1"),
-                    MyWidget2(name: "Reg Auth :", width: 40, sacondNmae: "1"),
-                    MyWidget2(name: "Vec Class :", width: 36, sacondNmae: "1"),
-                    MyWidget2(name: "Rc Status :", width: 37, sacondNmae: "1"),
-                    MyWidget2(name: "Fuel Type :", width: 37, sacondNmae: "1"),
                     MyWidget2(
-                        name: "Vehicle Age :", width: 23, sacondNmae: "1"),
+                        name: "Owner Name :", width: 18, sacondNmae:ownerName.toString()),
+                    MyWidget2(name: "Reg Auth :", width: 40, sacondNmae:reqAuth.toString()),
+                    MyWidget2(name: "Vec Class :", width: 36, sacondNmae: vecClass.toString()),
+                    MyWidget2(name: "Rc Status :", width: 37, sacondNmae:rcStatus.toString()),
+                    MyWidget2(name: "Fuel Type :", width: 37, sacondNmae:fuelType.toString()),
                     const Divider(color: Colors.black),
                     MyWidget2(
-                        name: "Registration\nDate", width: 50, sacondNmae: "1"),
+                        name: "Registration\nDate", width: 50, sacondNmae:registrationDate.toString()),
                     MyWidget2(
                         name: "Fitness Valid\nUp To",
                         width: 45,
-                        sacondNmae: "1"),
+                        sacondNmae: pollutionVal.toString()),
                     MyWidget2(
-                        name: "Insurance Valid\nUpTo",
-                        width: 25,
-                        sacondNmae: "1"),
-                    MyWidget2(
-                        name: "Tax Valid\nUpTo", width: 60, sacondNmae: "1"),
+                        name: "Tax Valid\nUpTo", width: 60, sacondNmae:taxVal.toString()),
                     MyWidget2(
                         name: "P.U.U.C Valid\nUpTo",
                         width: 48,
-                        sacondNmae: "1"),
+                        sacondNmae:   insuranceVal.toString()),
                   ],
                 ),
               ),
@@ -120,8 +114,10 @@ class RcBook extends StatelessWidget {
                     child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const FineDetails(
-                                vehicleNumber: "KL 45 J 2332"),
+                            builder: (context) =>
+                                FineDetails(
+                                  rcId: rcNum.toString(),
+                                  vehicleNumber:registrationDate.toString()),
                           ));
                         },
                         child: const Text("Fine ")),
@@ -129,7 +125,7 @@ class RcBook extends StatelessWidget {
                   ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => Summons(),
+                          builder: (context) => Summons(vehicleNumber:registrationDate.toString()),
                         ));
                       },
                       child: const Text("Summons"))

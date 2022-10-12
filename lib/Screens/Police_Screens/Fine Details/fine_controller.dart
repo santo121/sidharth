@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
 
+
+
 class FineController extends ChangeNotifier {
+
+
   String? vehicleNumber;
   String? name;
   String? mobileNumber;
-  List<String>? offense;
+  // List<String>? offense;
   String? amount;
   String? address;
-  String? modeOfFine;
+  String? modeOfFine="online";
+  List<String> selectedOffense=[];
+  bool ?checkBoxVal =false;
+  List<String> payMode=["online","offline"];
+  void changeCheckBoxVal(val){
+    checkBoxVal = val;
+    notifyListeners();
 
+  }
+  void addSelectedOffense(val){
+    selectedOffense.add(val);
+  }
+  void removeSelectedOffense(val){
+    selectedOffense.remove(val);
+  }
   void changeVehicleNumber(val) {
     vehicleNumber = val;
     notifyListeners();
@@ -24,10 +41,10 @@ class FineController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeOffense(val) {
-    offense = val;
-    notifyListeners();
-  }
+  // void changeOffense(val) {
+  //   offense = val;
+  //   notifyListeners();
+  // }
 
   void changeAmount(val) {
     amount = val;
@@ -40,7 +57,7 @@ class FineController extends ChangeNotifier {
   }
 
   void changeModeOfFine(val) {
-    vehicleNumber = val;
+    modeOfFine = val;
     notifyListeners();
   }
 
@@ -49,7 +66,7 @@ class FineController extends ChangeNotifier {
       "vehicle_number": vehicleNumber,
       "name": name,
       "mobile_number": mobileNumber,
-      "offense": offense.toString(),
+      "offense": selectedOffense.toString(),
       "amount": amount,
       "address": address,
       "modeOfFine": modeOfFine
