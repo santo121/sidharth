@@ -1,6 +1,8 @@
+import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/fine_controller.dart';
+
 class OffenseModel{
   String vehicleNumber,name,mobileNumber,amount,address,modeOfPayment,rcId,stationId;
-  List<String> selectedOffense;
+  List<FineIndex> selectedOffense;
   OffenseModel({
     required this.address,
     required this.amount,
@@ -11,11 +13,13 @@ class OffenseModel{
     required this.vehicleNumber,
     required this.rcId,
     required this.stationId
-
-
-    });
+});
   
   Map<String,String> toJson(){
+   List <int> offenseId=[]; 
+    for (var i in selectedOffense){
+      offenseId.add(i.index);
+    }
     return {
         "offense_id":"1,2,3",
         "rc_id":rcId.toString(),

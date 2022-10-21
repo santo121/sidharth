@@ -65,10 +65,11 @@ class PoliceHomeScreen extends StatelessWidget {
                               ownerName: 'Stefin',
                               pollutionVal: data.pollutionvalidupto.toString(),
                               rcStatus: data.rcStatus,
-                              registrationDate: data.registernumber.toString(),
+                              registrationDate:data.registrationdate,
                               reqAuth: "Thrissur",
                               taxVal: data.taxvalidupto.toString(),
                               vecClass: 'Four wheeler',
+                              vehicleNumber: data.registernumber,
                             ),
                           ));
                         }

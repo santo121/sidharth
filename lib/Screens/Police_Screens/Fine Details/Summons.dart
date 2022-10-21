@@ -194,10 +194,10 @@ class Summons extends StatelessWidget {
                     valFnc: (val){
                       myModel.changeCheckBoxVal(val);
                       if(val!){
-                      myModel.addSelectedOffense(fineList[index].fineName);
+                      myModel.addSelectedOffense(FineIndex(index: index, offense: fineList[index].fineName,));
                       
                       }else{
-                        myModel.removeSelectedOffense(fineList[index].fineName);
+                        myModel.removeSelectedOffense(FineIndex(index: index, offense: fineList[index].fineName));
                       }
                       fineList[index].checkFlag= myModel.checkBoxVal!;
                         log(myModel.selectedOffense.toString());
@@ -243,11 +243,11 @@ class Summons extends StatelessWidget {
 }
 
 }
-  extension StringConverter on List{
+  extension StringConverter on List<FineIndex>{
 String listToString (){
     String value='';
     for (var element in this) { 
-      value += "${element+","}";
+      value += "${element.offense},";
     }
     return value;
 }

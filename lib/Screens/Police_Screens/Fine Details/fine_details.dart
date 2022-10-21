@@ -1,23 +1,19 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sidarth_new/Functions/functions.dart';
 import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/fine_controller.dart';
 import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/offence_service.dart';
 import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/offense_details_model.dart';
 import 'package:sidarth_new/Widgets/police_bottomNav/bottomnav.dart';
 import 'package:sidarth_new/Widgets/police_bottomNav/police_bottom_icons.dart';
 import 'package:sidarth_new/Widgets/widgets.dart';
-
 import '../../../cont_file.dart';
 import 'fine_list_model_class.dart';
-
 class FineDetails extends StatelessWidget {
   FineDetails({super.key, required this.vehicleNumber, required this.rcId});
   final String vehicleNumber;
   final String rcId;
-
+   double? fineTotal;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,13 +97,14 @@ class FineDetails extends StatelessWidget {
                   TextField(
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
+                      
                       myModel.changeAmount(value);
                     },
-                    decoration: const InputDecoration(
-                        hintText: "Amount",
+                    decoration:InputDecoration(
+                        hintText: myModel.selectedOffense!=null?myModel.selectedOffense.calcFine().toString():"Amount",
                         fillColor: Colors.white,
                         filled: true,
-                        border: OutlineInputBorder()),
+                        border:const OutlineInputBorder()),
                   ),
                   const SizedBox(
                     height: 10,
@@ -147,13 +144,7 @@ class FineDetails extends StatelessWidget {
                                   onPressed: () {
                                     selectedIndex.value = 1;
                                     myModel.changeVehicleNumber(vehicleNumber);
-                                    // log("ching ${myModel.address}");
-                                    // log("ching ${myModel.amount}");
-                                    // log("ching ${myModel.mobileNumber}");
-                                    // log("ching ${myModel.name}");
-                                    // log("ching ${myModel.vehicleNumber}");
-                                    // log("ching ${myModel.modeOfFine}");
-                                    // log("ching ${myModel.selectedOffense}");
+                                    
                                     if (myModel.address != null &&
                                         myModel.amount != null &&
                                         myModel.mobileNumber != null &&
@@ -253,13 +244,13 @@ class FineDetails extends StatelessWidget {
                             myModel.changeCheckBoxVal(val);
                             if (val!) {
                               myModel
-                                  .addSelectedOffense(fineList[index].fineName);
+                                  .addSelectedOffense(FineIndex(index: index, offense: fineList[index].fineName));
                             } else {
                               myModel.removeSelectedOffense(
-                                  fineList[index].fineName);
+                                  FineIndex(index: index, offense: fineList[index].fineName));
                             }
                             fineList[index].checkFlag = myModel.checkBoxVal!;
-                            log(myModel.selectedOffense.toString());
+                            log(myModel.selectedOffense.listToString().toString());
                           },
                         );
                       }),
@@ -271,25 +262,7 @@ class FineDetails extends StatelessWidget {
                         },
                         child: const Text("Next"))),
 
-                // CheckButton()
-                // Expanded(
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.stretch,
-                //     children: [
-                //       Column(
-                //        children: [ ListView.builder(
-                //           itemCount: fineList.length,
-                //           itemBuilder: (BuildContext context, int index) {
-                //             return const CheckButton();
-                //           },
-                //         ),],
-                //       ),
-                //       Center(
-                //           child: ElevatedButton(
-                //               onPressed: () {}, child: const Text("Next"))),
-                //     ],
-                //   ),
-                // ),
+               
               ]);
         });
       },
@@ -297,11 +270,42 @@ class FineDetails extends StatelessWidget {
   }
 }
 
-extension StringConverter on List {
+extension StringConverter on List<FineIndex> {
   String listToString() {
     String value = '';
     for (var element in this) {
-      value += "${element + ","}";
+      
+      value += "${element.offense} ,";
+    }
+    return value;
+  }
+}
+extension FineCalc on List<FineIndex> {
+  double calcFine() {
+    double value =0;
+
+    for (var element in this) {
+      
+    
+
+    switch(element.index){
+      case 0:
+      value +=200;
+      break;
+      case 1:
+      value += 500;
+      break;
+      case 2:
+      value +=150.5;
+      break;
+      case 3:
+      value +=800;
+      break;
+      case 4:
+      value +=500;
+      break;
+
+    }
     }
     return value;
   }

@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
-
+class FineIndex{
+  String offense;
+  int index;
+  FineIndex({required this.index,required this.offense});
+}
 
 class FineController extends ChangeNotifier {
-
-
   String? vehicleNumber;
   String? name;
   String? mobileNumber;
@@ -12,19 +16,25 @@ class FineController extends ChangeNotifier {
   String? amount;
   String? address;
   String? modeOfFine="online";
-  List<String> selectedOffense=[];
+  List<FineIndex> selectedOffense=[];
+  
   bool ?checkBoxVal =false;
   List<String> payMode=["online","offline"];
   void changeCheckBoxVal(val){
     checkBoxVal = val;
+    log("data${selectedOffense.length}");
+
     notifyListeners();
 
   }
-  void addSelectedOffense(val){
+  void addSelectedOffense(FineIndex val){
     selectedOffense.add(val);
+    notifyListeners();
   }
-  void removeSelectedOffense(val){
+  void removeSelectedOffense(FineIndex val){
     selectedOffense.remove(val);
+    log("data${selectedOffense.length}");
+    notifyListeners();
   }
   void changeVehicleNumber(val) {
     vehicleNumber = val;
@@ -40,11 +50,6 @@ class FineController extends ChangeNotifier {
     mobileNumber = val;
     notifyListeners();
   }
-
-  // void changeOffense(val) {
-  //   offense = val;
-  //   notifyListeners();
-  // }
 
   void changeAmount(val) {
     amount = val;

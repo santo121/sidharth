@@ -9,3 +9,5 @@ List<FineModelClass> fineList=
       FineModelClass(checkFlag: false,fineName: "Not wearing seatbelt"),
       FineModelClass(checkFlag: false,fineName: "Not wearing helmet"),
     ];
+  
+

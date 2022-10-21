@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/Summons.dart';
 import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/fine_details.dart';
 import 'package:sidarth_new/Widgets/widgets.dart';
-
 class RcBook extends StatelessWidget {
   RcBook({
     super.key,
@@ -15,7 +14,8 @@ class RcBook extends StatelessWidget {
     required this.reqAuth,
     required this.taxVal,
     required this.vecClass,
-    required this.rcNum
+    required this.rcNum,
+    required this.vehicleNumber
   });
   String? ownerName,
       reqAuth,
@@ -26,14 +26,15 @@ class RcBook extends StatelessWidget {
       insuranceVal,
       taxVal,
       pollutionVal,
-      rcNum;
+      rcNum,
+      vehicleNumber;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
+        preferredSize: const Size.fromHeight(60),
         child: AppBar12(title: "RC Book", autoAppbar: true),
       ),
       body: Padding(
@@ -69,13 +70,10 @@ class RcBook extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         MyWidget2(
-                          name: "KL5919213",
+                          name: vehicleNumber.toString(),
                           sacondNmae: "",
                         ),
-                        MyWidget2(
-                          name: "KL5919213",
-                          sacondNmae: "",
-                        )
+                      
                       ],
                     ),
                     const Divider(
@@ -117,7 +115,7 @@ class RcBook extends StatelessWidget {
                             builder: (context) =>
                                 FineDetails(
                                   rcId: rcNum.toString(),
-                                  vehicleNumber:registrationDate.toString()),
+                                  vehicleNumber:vehicleNumber.toString()),
                           ));
                         },
                         child: const Text("Fine ")),
@@ -169,7 +167,7 @@ class MyWidget2 extends StatelessWidget {
           ),
         ],
       ),
-      SizedBox(
+      const SizedBox(
         height: 10,
       )
     ]);
