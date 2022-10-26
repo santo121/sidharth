@@ -21,13 +21,16 @@ FinePaidDetailsService service = FinePaidDetailsService();
                   future: service.getFinDetails(psId: "1"),
                   builder: (context,val) {
                     if(val.hasData){
+                      
                       return ListView.builder(
                         scrollDirection: Axis.vertical,
                       itemCount: val.data!.data!.length,
                       itemBuilder: (context,index) {
                         final data = val.data!.data;
-                        return Container(
-                          margin: EdgeInsets.only(top: 10),
+                        if (data![index].mode!='online'){
+                          return 
+                        Container(
+                          margin:const EdgeInsets.only(top: 10),
                           padding: const EdgeInsets.all(20),
                           color: Colors.white,
                           child: Column(
@@ -37,7 +40,7 @@ FinePaidDetailsService service = FinePaidDetailsService();
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "Name :${data![index].name}",
+                                    "Name :${data[index].name}",
                                     style: TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                   Text(
@@ -57,6 +60,8 @@ FinePaidDetailsService service = FinePaidDetailsService();
                             ],
                           ),
                         );
+                        }
+                        else return SizedBox();
                       }, 
                     );
                     }

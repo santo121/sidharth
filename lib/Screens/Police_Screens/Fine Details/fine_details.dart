@@ -126,7 +126,18 @@ class FineDetails extends StatelessWidget {
                   ),
                   Container(
                     color: Colors.white,
-                    child: DropButton(),
+                    child: DropButton(onTap: (item) {
+                
+                if (item == null) {
+                  return;
+                }
+                myModel.changeModeOfFine(item);
+                log(myModel.modeOfFine.toString());
+                // selectedItem = item;
+                // items.notifyListeners();
+                
+              },),
+                    
                   ),
                   const SizedBox(
                     height: 10,

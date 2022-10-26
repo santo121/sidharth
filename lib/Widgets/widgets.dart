@@ -86,9 +86,9 @@ class AppBar12 extends StatelessWidget {
 // DROP DOWN PAGE
 
 class DropButton extends StatelessWidget {
-  DropButton({super.key});
+  DropButton({super.key,required this.onTap});
   ValueNotifier<List<String>> items = ValueNotifier(["Online", "Offline"]);
-
+final Function(String? val) onTap;
   String selectedItem = 'Online';
 
   @override
@@ -110,17 +110,10 @@ class DropButton extends StatelessWidget {
                             fontSize: 17, fontWeight: FontWeight.w300),
                       )))
                   .toList(),
-              onChanged: (item) {
-                
-                if (item == null) {
-                  return;
-                }
-                myModel.changeModeOfFine(item);
-                log(myModel.modeOfFine.toString());
-                // selectedItem = item;
-                // items.notifyListeners();
-                
-              },
+              onChanged:onTap,
+              
+              
+               
             );
           },
         );

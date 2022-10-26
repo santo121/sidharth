@@ -50,7 +50,7 @@ class AddminLogin extends StatelessWidget {
                   child: TextField(
                       style: const TextStyle(color: Colors.black),
                       onChanged: (val){
-                        myModel.changeLogin(val);
+                        myModel.changeLogin(val.trim());
                       },
                       decoration: const InputDecoration(
                           filled: true,
@@ -67,7 +67,7 @@ class AddminLogin extends StatelessWidget {
                   child: TextField(
                       style: const TextStyle(color: Colors.black),
                       onChanged: (val){
-                          myModel.changePassword(val);
+                          myModel.changePassword(val.trim());
                       },
                       decoration: const InputDecoration(
                           filled: true,
@@ -91,6 +91,7 @@ class AddminLogin extends StatelessWidget {
                          if( value.statusCode==null){
                           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context) => PoliceBottomNav() ), (route) => false);
                        final response = await SharedPreferences.getInstance();
+                       await response.setBool('name', true);
                        await response.setString("station_name",value.data!.stationName.toString());
                        await response.setString("postoffice",value.data!.place.toString());
                        await response.setString("pin",value.data!.pin.toString());

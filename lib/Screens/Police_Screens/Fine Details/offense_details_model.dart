@@ -25,7 +25,7 @@ class OffenseModel{
         "rc_id":rcId.toString(),
         "name":name.toString(),
         "phone_number":mobileNumber.toString(),
-        "mode":modeOfPayment.toString(),
+        "mode":'online',
         "station_id":stationId.toString(),
         "amount":amount.toString(),
         "address":address.toString()

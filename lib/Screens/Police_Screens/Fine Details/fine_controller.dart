@@ -15,7 +15,7 @@ class FineController extends ChangeNotifier {
   // List<String>? offense;
   String? amount;
   String? address;
-  String? modeOfFine="online";
+  String? modeOfFine;
   List<FineIndex> selectedOffense=[];
   
   bool ?checkBoxVal =false;
@@ -61,7 +61,7 @@ class FineController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeModeOfFine(val) {
+  void changeModeOfFine(String val) {
     modeOfFine = val;
     notifyListeners();
   }
