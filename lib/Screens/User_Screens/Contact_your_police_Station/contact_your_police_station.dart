@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:sidarth_new/Screens/User_Screens/Contact_your_police_Station/police_station_address_model.dart';
 import 'package:sidarth_new/Widgets/widgets.dart';
 
+  // Map<String,PoliceStationAddress> policeStationAddress={
+  //   'Athikad':PoliceStationAddress(contactNumber: '0487 2632314', policeStationName: 'Anthikad Police station', siName: 'Raju kumar')
+  // };
+
+List<PoliceStationAddress>policeStationAddress = 
+[
+PoliceStationAddress(contactNumber: '0487 2632314', policeStationName: 'Anthikad Police station', siName: 'Raju kumar'),
+PoliceStationAddress(contactNumber: '0480 2632314', policeStationName: 'Irinjalkuda Police station', siName: 'Raju kumar'),
+PoliceStationAddress(contactNumber: '0484 2632314', policeStationName: 'Thrissur Police station', siName: 'Raju kumar')
+];
 class ContactpoliceStation extends StatefulWidget {
   const ContactpoliceStation({super.key});
 
@@ -9,12 +20,15 @@ class ContactpoliceStation extends StatefulWidget {
 }
 
 class _ContactpoliceStationState extends State<ContactpoliceStation> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: primaryColor,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(60),
+          preferredSize: const Size.fromHeight(60),
           child: AppBar12(title: "Contact Police Station", autoAppbar: true),
         ),
         body: Padding(
@@ -27,9 +41,9 @@ class _ContactpoliceStationState extends State<ContactpoliceStation> {
                     showSearch(context: context, delegate: MySearchOption());
                   },
                   child: Container(
-                    padding: EdgeInsets.all(20),
-                    child: Text("Search"),
+                    padding: const EdgeInsets.all(20),
                     color: Colors.white,
+                    child: const Text("Search"),
                   ))
             ],
           ),
@@ -49,9 +63,8 @@ class MySearchOption extends SearchDelegate {
               query = '';
             }
           },
-          icon: Icon(Icons.clear))
+          icon: const Icon(Icons.clear))
     ];
-    throw UnimplementedError();
   }
 
   @override
@@ -60,8 +73,7 @@ class MySearchOption extends SearchDelegate {
         onPressed: () {
           close(context, null);
         },
-        icon: Icon(Icons.arrow_back));
-    throw UnimplementedError();
+        icon: const Icon(Icons.arrow_back));
   }
 
   @override
@@ -69,25 +81,23 @@ class MySearchOption extends SearchDelegate {
     return Center(
       child: Text(query),
     );
-    throw UnimplementedError();
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> suggestions = [];
     return ListView.builder(
-      itemCount: suggestions.length,
+      itemCount: policeStationAddress.length,
       itemBuilder: (context, index) {
-        final suggestion = suggestions[index];
+        final suggestion = policeStationAddress[index];
         return ListTile(
-          title: Text(suggestion),
+          title: Text(suggestion.policeStationName),
           onTap: () {
-            query = suggestion;
+            query = suggestion.contactNumber;
             showResults(context);
           },
         );
       },
     );
-    throw UnimplementedError();
   }
 }

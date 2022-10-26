@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sidarth_new/Screens/User_Screens/User_Services/nearest_hospital.dart';
+import 'package:sidarth_new/Screens/User_Screens/User_Services/nearest_rto.dart';
+import 'package:sidarth_new/Screens/User_Screens/User_Services/pollution_map.dart';
 import 'package:sidarth_new/Widgets/widgets.dart';
 
 class Services extends StatelessWidget {
@@ -17,17 +20,34 @@ class Services extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ServicesStack(
-                title: "Nearest polluution\nChecking center",
+                title: "Nearest pollution\nChecking center",
                 image: "Image/pollution checking (1).jpg",
-                function: () {}),
+                function: () {
+                  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const PollutionCheckingMap()),
+  );
+                }),
             ServicesStack(
                 title: "Nearest Hospital",
                 image: "Image/istockphoto-1300273646-612x612.jpg",
-                function: () {}),
+                function: () {
+Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const NearestHospital()),
+  );
+                  
+                }),
             ServicesStack(
               title: "Nearest RTO",
               image: "Image/istockphoto-1064071730-170667a.jpg",
-              function: () {},
+              function: () {
+                
+                Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const NearestRTO()),
+  );
+              },
             )
           ],
         ),

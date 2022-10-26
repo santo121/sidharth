@@ -181,7 +181,7 @@ class FineDetails extends StatelessWidget {
                                                   .vehicleNumber
                                                   .toString());
 
-                                      log("to json ${sentFineToJson.toJson().toString()}");
+                                      // log("to json ${sentFineToJson.toJson().toString()}");
                                       // Navigator.push(
                                       //   context,
                                       //   MaterialPageRoute(

@@ -31,7 +31,7 @@ final String userId;
                   ));
                 },
                 child: const Text("PAY FINE")),
-                const SizedBox(
+                const SizedBox( 
               height: 10,
             ),
                 ElevatedButton(
