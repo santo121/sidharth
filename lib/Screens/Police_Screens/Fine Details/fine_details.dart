@@ -95,11 +95,13 @@ class FineDetails extends StatelessWidget {
                     height: 10,
                   ),
                   TextField(
+                    readOnly: true,
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
-                      
-                      myModel.changeAmount(value);
+                    
+                      myModel.changeAmount(myModel.selectedOffense!=null?myModel.selectedOffense.calcFine().toString():'0');
                     },
+
                     decoration:InputDecoration(
                         hintText: myModel.selectedOffense!=null?myModel.selectedOffense.calcFine().toString():"Amount",
                         fillColor: Colors.white,
@@ -155,9 +157,9 @@ class FineDetails extends StatelessWidget {
                                   onPressed: () {
                                     selectedIndex.value = 1;
                                     myModel.changeVehicleNumber(vehicleNumber);
-                                    
+                                    // log(sentFineToJson.toJson().toString());
                                     if (myModel.address != null &&
-                                        myModel.amount != null &&
+                                        // myModel.amount != null &&
                                         myModel.mobileNumber != null &&
                                         myModel.name != null &&
                                         myModel.vehicleNumber != null &&
@@ -169,7 +171,7 @@ class FineDetails extends StatelessWidget {
                                               stationId: '1',
                                               address:
                                                   myModel.address.toString(),
-                                              amount: myModel.amount.toString(),
+                                              amount:myModel.selectedOffense.isNotEmpty? myModel.selectedOffense.calcFine().toString():'0',
                                               name: myModel.name.toString(),
                                               mobileNumber: myModel.mobileNumber
                                                   .toString(),
@@ -181,14 +183,8 @@ class FineDetails extends StatelessWidget {
                                                   .vehicleNumber
                                                   .toString());
 
-                                      // log("to json ${sentFineToJson.toJson().toString()}");
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //       builder: (context) =>
-                                      //           PoliceBottomNav()),
-                                      // );
-
+                                     
+                                        log(sentFineToJson.toJson().toString());
                                       OffenseService service = OffenseService();
                                       service.sendFine(sentFineToJson).then((value){
                                         print(value);
@@ -203,6 +199,7 @@ class FineDetails extends StatelessWidget {
                                         }
                                       });
                                     }
+                                    else{log("message");}
                                   },
                                   child: const Text("Send Fine")),
                         )
@@ -249,16 +246,17 @@ class FineDetails extends StatelessWidget {
                       itemCount: fineList.length,
                       itemBuilder: (BuildContext context, int index) {
                         return CheckButton(
+                          indexVal: fineList[index].indexVal,
                           title: fineList[index].fineName,
                           value: fineList[index].checkFlag,
                           valFnc: (val) {
                             myModel.changeCheckBoxVal(val);
                             if (val!) {
                               myModel
-                                  .addSelectedOffense(FineIndex(index: index, offense: fineList[index].fineName));
+                                  .addSelectedOffense(FineIndex(selectedIndex: fineList[index].indexVal, offense: fineList[index].fineName));
                             } else {
                               myModel.removeSelectedOffense(
-                                  FineIndex(index: index, offense: fineList[index].fineName));
+                              FineIndex(selectedIndex: fineList[index].indexVal, offense: fineList[index].fineName) );
                             }
                             fineList[index].checkFlag = myModel.checkBoxVal!;
                             log(myModel.selectedOffense.listToString().toString());
@@ -299,7 +297,7 @@ extension FineCalc on List<FineIndex> {
       
     
 
-    switch(element.index){
+    switch(element.selectedIndex){
       case 0:
       value +=200;
       break;

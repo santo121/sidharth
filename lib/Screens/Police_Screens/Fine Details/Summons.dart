@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -189,24 +188,27 @@ class Summons extends StatelessWidget {
                   itemBuilder: (BuildContext context,int index){
               
                   return  CheckButton(
+                    indexVal: fineList[index].indexVal,
                     title: fineList[index].fineName,
                     value: fineList[index].checkFlag,
                     valFnc: (val){
                       myModel.changeCheckBoxVal(val);
                       if(val!){
-                      myModel.addSelectedOffense(FineIndex(index: index, offense: fineList[index].fineName,));
+                      myModel.addSelectedOffense(FineIndex(selectedIndex: fineList[index].indexVal, offense: fineList[index].fineName,));
+                        log('fine index selected ${fineList[index].indexVal.toString()}');
+                        log(index.toString());
                       
                       }else{
-                        myModel.removeSelectedOffense(FineIndex(index: index, offense: fineList[index].fineName));
+                        log('fine index unselected ${fineList[index].indexVal.toString()}');
+                        log(index.toString());
+                        myModel.removeSelectedOffense(FineIndex(selectedIndex: fineList[index].indexVal, offense: fineList[index].fineName,));
+
                       }
                       fineList[index].checkFlag= myModel.checkBoxVal!;
-                        log(myModel.selectedOffense.toString());
+                        // log(myModel.selectedOffense.toString());
                     },
                     );
                 }),
-                
-                
-
               ),
               Center(
                           child: ElevatedButton(

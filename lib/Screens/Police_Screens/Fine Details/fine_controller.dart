@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class FineIndex{
   String offense;
-  int index;
-  FineIndex({required this.index,required this.offense});
+  int selectedIndex;
+  
+  FineIndex({required this.selectedIndex,required this.offense});
 }
 
 class FineController extends ChangeNotifier {
@@ -22,7 +23,7 @@ class FineController extends ChangeNotifier {
   List<String> payMode=["online","offline"];
   void changeCheckBoxVal(val){
     checkBoxVal = val;
-    log("data${selectedOffense.length}");
+    // log("data${selectedOffense.length}");
 
     notifyListeners();
 
@@ -32,7 +33,7 @@ class FineController extends ChangeNotifier {
     notifyListeners();
   }
   void removeSelectedOffense(FineIndex val){
-    selectedOffense.remove(val);
+    selectedOffense.removeWhere((element) => element.offense==val.offense);
     log("data${selectedOffense.length}");
     notifyListeners();
   }

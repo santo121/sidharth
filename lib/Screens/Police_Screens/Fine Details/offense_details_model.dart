@@ -18,10 +18,10 @@ class OffenseModel{
   Map<String,String> toJson(){
    List <int> offenseId=[]; 
     for (var i in selectedOffense){
-      offenseId.add(i.index);
+      offenseId.add(i.selectedIndex);
     }
     return {
-        "offense_id":"1,2,3",
+        "offense_id":offenseId.toString(),
         "rc_id":rcId.toString(),
         "name":name.toString(),
         "phone_number":mobileNumber.toString(),

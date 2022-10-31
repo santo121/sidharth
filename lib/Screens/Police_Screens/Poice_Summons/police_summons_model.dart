@@ -1,12 +1,13 @@
+
+
 class StationSummonsModel {
   List<Data>? data;
   int? statusCode;
   StationSummonsModel({this.data});
-
-
-StationSummonsModel.statusCode(status){
+  StationSummonsModel.statusCode(status){
   statusCode = status;
 }
+
   StationSummonsModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <Data>[];
@@ -37,6 +38,14 @@ class Data {
   int? stationId;
   String? createdAt;
   String? updatedAt;
+  String? engineno;
+  String? registernumber;
+  String? rcStatus;
+  String? pollutionvalidupto;
+  String? insurancevalidupto;
+  String? registrationdate;
+  String? taxvalidupto;
+  String? phonenumber;
 
   Data(
       {this.summonsId,
@@ -49,7 +58,15 @@ class Data {
       this.attachment,
       this.stationId,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.engineno,
+      this.registernumber,
+      this.rcStatus,
+      this.pollutionvalidupto,
+      this.insurancevalidupto,
+      this.registrationdate,
+      this.taxvalidupto,
+      this.phonenumber});
 
   Data.fromJson(Map<String, dynamic> json) {
     summonsId = json['summons_id'];
@@ -63,6 +80,14 @@ class Data {
     stationId = json['station_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    engineno = json['engineno'];
+    registernumber = json['registernumber'];
+    rcStatus = json['rc_status'];
+    pollutionvalidupto = json['pollutionvalidupto'];
+    insurancevalidupto = json['insurancevalidupto'];
+    registrationdate = json['registrationdate'];
+    taxvalidupto = json['taxvalidupto'];
+    phonenumber = json['phonenumber'];
   }
 
   Map<String, dynamic> toJson() {
@@ -78,6 +103,14 @@ class Data {
     data['station_id'] = this.stationId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['engineno'] = this.engineno;
+    data['registernumber'] = this.registernumber;
+    data['rc_status'] = this.rcStatus;
+    data['pollutionvalidupto'] = this.pollutionvalidupto;
+    data['insurancevalidupto'] = this.insurancevalidupto;
+    data['registrationdate'] = this.registrationdate;
+    data['taxvalidupto'] = this.taxvalidupto;
+    data['phonenumber'] = this.phonenumber;
     return data;
   }
 }

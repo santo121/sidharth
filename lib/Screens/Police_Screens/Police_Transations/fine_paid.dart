@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sidarth_new/Screens/Police_Screens/Police_Transations/fine_paid_details_service.dart';
@@ -27,7 +29,7 @@ FinePaidDetailsService service = FinePaidDetailsService();
                       itemCount: val.data!.data!.length,
                       itemBuilder: (context,index) {
                         final data = val.data!.data;
-                        if (data![index].mode!='online'){
+                        if (data![index].mode!='online'&&data[index].mode!=null){
                           return 
                         Container(
                           margin:const EdgeInsets.only(top: 10),
@@ -52,8 +54,8 @@ FinePaidDetailsService service = FinePaidDetailsService();
                               const SizedBox(
                                 height: 15,
                               ),
-                              MyText2(name1: "RC No :", width: 90, name2:data[index].rcId.toString()),
-                              MyText2(name1: "Offense :", width: 90, name2:data[index].offenseId.toString() ),
+                              MyText2(name1: "RC No :", width: 90, name2:data[index].registernumber.toString()),
+                              MyText2(name1: "Offense :", width: 90, name2:data[index].offenseId.toString()),
                               MyText2(name1: "Amount :", width: 91, name2: data[index].amount.toString() ),
                               MyText2(name1: "Type Of Transaction", width: 20, name2: data[index].mode.toString() ),
                               MyText2(name1: "Phone number", width: 53, name2: data[index].phoneNumber.toString() )
@@ -79,3 +81,5 @@ FinePaidDetailsService service = FinePaidDetailsService();
     
   
 }}
+
+

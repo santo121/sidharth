@@ -1,5 +1,5 @@
 class FineResponse {
-   List<Data>?data;
+  List<Data>? data;
 
   FineResponse({this.data});
 
@@ -36,6 +36,7 @@ class Data {
   String? street;
   String? status;
   String? mode;
+  String? registernumber;
 
   Data(
       {this.fineId,
@@ -51,7 +52,8 @@ class Data {
       this.village,
       this.street,
       this.status,
-      this.mode});
+      this.mode,
+      this.registernumber});
 
   Data.fromJson(Map<String, dynamic> json) {
     fineId = json['fine_id'];
@@ -68,6 +70,7 @@ class Data {
     street = json['street'];
     status = json['status'];
     mode = json['mode'];
+    registernumber = json['registernumber'];
   }
 
   Map<String, dynamic> toJson() {
@@ -86,6 +89,7 @@ class Data {
     data['street'] = this.street;
     data['status'] = this.status;
     data['mode'] = this.mode;
+    data['registernumber'] = this.registernumber;
     return data;
   }
 }

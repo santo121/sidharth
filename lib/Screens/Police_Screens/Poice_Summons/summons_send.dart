@@ -19,7 +19,8 @@ class SummonsSend extends StatelessWidget {
                       itemCount: snapShot.data!.data!.length,
                       itemBuilder: (context, index) {
                         final response = snapShot.data!.data;
-                        return Padding(
+                        if(response![index].attachment!=null){
+return Padding(
                           padding: const EdgeInsets.all(35),
                           child: Column(children: [
                             Container(
@@ -33,7 +34,7 @@ class SummonsSend extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "Name : ${response![index].name}",
+                                        "Name : ${response[index].name}",
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -50,7 +51,7 @@ class SummonsSend extends StatelessWidget {
                                   MyText2(
                                       name1: "RC id :",
                                       width: 90,
-                                      name2: response[index].rcId.toString()),
+                                      name2: response[index].registernumber.toString()),
                                   MyText2(
                                       name1: "Offense :",
                                       width: 90,
@@ -79,6 +80,8 @@ class SummonsSend extends StatelessWidget {
                             ),
                           ]),
                         );
+                        }else{return SizedBox();}
+                        
                       });
                 } else {
                   return const Center(child: CircularProgressIndicator());

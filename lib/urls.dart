@@ -14,3 +14,4 @@ String userRcDetailsApi = "https://$ipAddress/api/rc_user";
 
 String userSummonsList({required String id}) => "https://$ipAddress/api/summons_citizen?rc_id=$id";
 String policeSummonsApi({required String id}) => "https://$ipAddress/api/summons_station?station_id=$id";
+String fineToSummons() => "https://$ipAddress/api/fine_to_summons";
