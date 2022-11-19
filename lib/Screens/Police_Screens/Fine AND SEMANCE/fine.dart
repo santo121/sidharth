@@ -46,12 +46,12 @@ void openCheckout(
 ) async {
     var options = {
       'key': 'rzp_test_hO0gujMeqHltNS',
-      'amount': amount,
+      'amount': amount*100,
       'name': 'Acme Corp.',
       'description': 'Fine T-Shirt',
       'retry': {'enabled': true, 'max_count': 1},
       'send_sms_hash': true,
-      'prefill': {'contact': '9544787977', 'email': 'test@razorpay.com'},
+      'prefill': {'contact': '9539247551', 'email': 'sidharthrajcj@gmail.com'},
       'external': {
         'wallets': ['paytm','freecharge'],
         'cards':['mastercard']
@@ -86,11 +86,7 @@ void dispose() {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
-              'PAY FINE AND SEMANCE',
-              style: TextStyle(color: Colors.white),
-
-            ),Expanded(child: FutureBuilder(
+          Expanded(child: FutureBuilder(
               future: serviceModel.fineService(userId: widget.userId),
               builder: (context, snapshot){
                   
@@ -101,7 +97,7 @@ void dispose() {
                     final modelVal = snapshot.data!.data![index];
 
                       return finePayWidget(name:modelVal.name.toString() ,
-                       regNum: modelVal.rcId.toString(),
+                       regNum: modelVal.toString(),
                        offense: modelVal.offenseId.toString(),
                         amount: modelVal.amount.toString(),
                          typeOfTransfer: modelVal.mode.toString(),
@@ -175,7 +171,9 @@ required onTap
                     children: [
                       MyText2(name1: "Name:", width: 118, name2: name),
                       MyText2(name1: "Reg No:", width: 110, name2: regNum),
-                      MyText2(name1: "Offense:", width: 110, name2: offense),
+                      SingleChildScrollView( 
+                        scrollDirection: Axis.horizontal,
+                        child: MyText2(name1: "Offense:", width: 110, name2: offense)),
                       MyText2(name1: "Amount:", width: 110, name2: amount),
                       MyText2(name1: "Type of Transaction:", width: 35, name2: typeOfTransfer),
                     ],

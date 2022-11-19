@@ -3,23 +3,22 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sidarth_new/Screens/Police_Screens/Poice_Summons/file_attachment_service.dart';
+import 'package:sidarth_new/Screens/Police_Screens/Poice_Summons/summons.dart';
 import 'package:sidarth_new/Screens/Police_Screens/Police_Transations/document_controller.dart';
 import 'package:sidarth_new/Screens/Police_Screens/Rc_book/rc_book.dart';
 import 'package:sidarth_new/Screens/AddminScreen/addmin_screen.dart';
 import 'package:sidarth_new/Widgets/User_bottomNav/user_bottomnav.dart';
 import 'package:sidarth_new/Widgets/police_bottomNav/bottomnav.dart';
-import 'package:sidarth_new/Widgets/widgets.dart';
 
 // pop Up Page//
 @immutable
 class FileAttachment extends StatelessWidget {
-FileAttachment({super.key});
-
+const FileAttachment({super.key,required this.summonsId});
+final String summonsId;
   Future pickImage({required context}) async {
     try {
 
@@ -82,21 +81,35 @@ Provider.of<DocumentController>(context,listen: false).changeBool(
                       ],
                     ),
                    const SizedBox(height: 20,),
-              ElevatedButton(
-                  onPressed: () {}, child: const Text("Send  Summons")),
+              Consumer<DocumentController>(
+                builder: (context,myModel,_) {
+                  return ElevatedButton(
+                      onPressed: () {
+                        FileAttachmentService service = FileAttachmentService();
+                        ModelForSummonsFileAttachment modelData = ModelForSummonsFileAttachment(photo: myModel.pickedDocument, summonsId: summonsId);
+                        service.sendFileToSummons(modelData).then((value) => value==200?
+                         Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => PoliceBottomNav(pageIndex: 2,)),
+  ):null
+                        
+                        ); 
+                      }, child: const Text("Send  Summons"));
+                }
+              ),
             ],
           ),
         );
   }
 }
 
-Future<void> fineNotPaid(BuildContext context) async {
+Future<void> fineNotPaid(BuildContext context,String summonsId) async {
   showDialog(
     context: context,
     builder: (ctx) {
-      return  SimpleDialog (children:[
+      return SimpleDialog (children:[
 
-       FileAttachment()
+       FileAttachment(summonsId: summonsId,)
        
       ]);
     },

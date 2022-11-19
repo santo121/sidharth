@@ -46,16 +46,8 @@ class RcBook extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const Text(
-                "Rc BOOK",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
-              const Divider(
-                color: Colors.white,
-              ),
+              
+             
               const SizedBox(
                 height: 15,
               ),
@@ -123,7 +115,7 @@ class RcBook extends StatelessWidget {
                   ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => Summons(vehicleNumber:registrationDate.toString()),
+                          builder: (context) => Summons(vehicleNumber:vehicleNumber.toString()),
                         ));
                       },
                       child: const Text("Summons"))

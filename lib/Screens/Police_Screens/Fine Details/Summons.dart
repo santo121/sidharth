@@ -7,6 +7,9 @@ import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/fine_controlle
 import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/fine_list_model_class.dart';
 import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/summons_contrller.dart';
 import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/summons_model.dart';
+import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/summons_service.dart';
+import 'package:sidarth_new/Screens/Police_Screens/Poice_Summons/summons_not_paid.dart';
+import 'package:sidarth_new/Widgets/police_bottomNav/bottomnav.dart';
 import 'package:sidarth_new/Widgets/widgets.dart';
 
 import '../../../cont_file.dart';
@@ -35,10 +38,7 @@ class Summons extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text(
-                          "Summons",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
+                       
                         const SizedBox(
                           height: 10,
                         ),
@@ -71,13 +71,12 @@ class Summons extends StatelessWidget {
                           height: 10,
                         ),
                         TextField(
-                          keyboardType: TextInputType.number,
                           onChanged: (value) {
-                            // phoneNumber = value;
-                            myModel.changeMobileNumber(value);
+                            // name = value;
+                            myModel.changeAddress(value);
                           },
                           decoration: const InputDecoration(
-                              hintText: "Mobile Number",
+                              hintText: "Address",
                               fillColor: Colors.white,
                               filled: true,
                               border: OutlineInputBorder()),
@@ -85,6 +84,21 @@ class Summons extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
+                        TextField(
+                          maxLength: 10,
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            // phoneNumber = value;
+                            myModel.changeMobileNumber(value);
+                          },
+                          decoration: const InputDecoration(
+                            
+                              hintText: "Mobile Number",
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder()),
+                        ),
+                        
                         GestureDetector(
                             onTap: () {
                               popUpPage1(context);
@@ -122,12 +136,24 @@ class Summons extends StatelessWidget {
                                             vehicleNumber.isNotEmpty
                                           ){
                                              SummonsModel saveData= SummonsModel(
+                                              address: myModel.address,
+                                              date:DateTime.now().toString(),
                                             mobileNumber: myModel.mobileNumber,
                                             name: myModel.name,
-                                            offense: myModelData.selectedOffense.toString(),
+                                            offense:myModelData.selectedOffense.listToString().toString(),
                                             vehicleNumber: vehicleNumber,
                                             );
                                             log(saveData.toJson().toString());
+                                           SummonsService service = SummonsService();
+                                           service.saveSummons(saveData).then((value){
+                                            log(value.toString());
+                                            Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) =>  PoliceBottomNav(pageIndex: 2,)),
+  );
+                                           }
+                                           
+                                           );
                                           }
                                          
                                           

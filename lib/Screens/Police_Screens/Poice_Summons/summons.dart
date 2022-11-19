@@ -28,7 +28,7 @@ class _SummonsState extends State<Summons> with SingleTickerProviderStateMixin {
             unselectedLabelColor: Colors.grey,
             labelColor: Colors.white,
             controller: tabcontroller,
-            tabs: [
+            tabs:const [
               Tab(
                 text: "Summons Send",
               ),

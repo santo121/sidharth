@@ -164,7 +164,7 @@ class FineDetails extends StatelessWidget {
                                         myModel.name != null &&
                                         myModel.vehicleNumber != null &&
                                         myModel.modeOfFine != null &&
-                                        myModel.selectedOffense.isNotEmpty) {
+                                        myModel.selectedOffense.listToString().toString().isNotEmpty) {
                                       OffenseModel sentFineToJson =
                                           OffenseModel(
                                               rcId: rcId,
@@ -178,7 +178,7 @@ class FineDetails extends StatelessWidget {
                                               modeOfPayment:
                                                   myModel.modeOfFine.toString(),
                                               selectedOffense:
-                                                  myModel.selectedOffense,
+                                                  myModel.selectedOffense.listToString().toString(),
                                               vehicleNumber: myModel
                                                   .vehicleNumber
                                                   .toString());

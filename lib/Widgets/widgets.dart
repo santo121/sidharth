@@ -20,15 +20,18 @@ class MyText2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Row(
+      Row(mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            name1,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
           SizedBox(
-            width: width,
+            width: 200,
+            child: Text(
+              name1,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
+         Text(':'),
+         SizedBox(width: 5,),
           Text(
             name2,
             style: const TextStyle(fontWeight: FontWeight.bold),
@@ -62,18 +65,7 @@ class AppBar12 extends StatelessWidget {
       backgroundColor: primaryColor,
       title: Row(
         children: [
-          const SizedBox(
-            width: 40,
-            height: 40,
-            child: CircleAvatar(
-              radius: 72.0,
-              backgroundColor: Colors.transparent,
-              backgroundImage: AssetImage('Image/Logo.jpg'),
-            ),
-          ),
-          const SizedBox(
-            width: 20,
-          ),
+        
           Text(title,
               style: const TextStyle(fontSize: 20, color: Colors.white),
               ),

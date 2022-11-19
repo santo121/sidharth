@@ -4,14 +4,15 @@ import 'package:sidarth_new/Widgets/widgets.dart';
 import 'package:sidarth_new/cont_file.dart';
 
 class SummonsList extends StatefulWidget {
- SummonsList({super.key,required this.rcId});
-String rcId;
+  SummonsList({super.key, required this.rcId});
+  String rcId;
   @override
   State<SummonsList> createState() => _SummonsListState();
 }
 
 class _SummonsListState extends State<SummonsList> {
   UserSummonsListService rcSummons = UserSummonsListService();
+  List<int> selectedSummons=[];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,14 +21,26 @@ class _SummonsListState extends State<SummonsList> {
           child: AppBar12(title: "Fine and Summons", autoAppbar: false),
           preferredSize: const Size.fromHeight(60)),
       body: FutureBuilder(
-        future: rcSummons.getUserSummonsList(widget.rcId),//!
+        future: rcSummons.getUserSummonsList(widget.rcId),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
                 itemCount: snapshot.data!.data!.length,
                 itemBuilder: (context, index) {
                   final data = snapshot.data!.data!;
-                  return acceptSummons(data[index].name.toString(),data[index].offenseId.toString());
+                  // data[index].
+                  return acceptSummons(data[index].name.toString(),
+                      data[index].offenseId.toString(),
+                    data[index].date.toString(),
+                    data[index].phoneNumber.toString(),
+                    data[index].rcId.toString(),
+                    data[index].attachment.toString(),
+                    (){
+                      setState(() {
+                        selectedSummons.add(index);
+                      });
+                    },index
+                      );
                 });
           } else {
             return const Center(child: CircularProgressIndicator());
@@ -37,10 +50,8 @@ class _SummonsListState extends State<SummonsList> {
     );
   }
 
-  Widget acceptSummons(
-    String name,
-    String offense
-  ) {
+  Widget acceptSummons(String name, String offense, String date,
+      String phoneNumber, String registerNumber, String file,onTap,int index) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -51,8 +62,17 @@ class _SummonsListState extends State<SummonsList> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MyText2(name1: "Name:  ", name2: name),
-              Container(child: MyText2(name1: "Offense:  ",  name2: fineList[int.parse(offense.toString())].fineName)),
+              MyText2(name1: "Name  ", name2: name),
+              MyText2(name1: "date  ", name2: date),
+              MyText2(name1: "Phone Number  ", name2: phoneNumber),
+              MyText2(name1: "Register number  ", name2: registerNumber),
+              SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Container(
+                      child: MyText2(name1: "Offense  ", name2: offense))),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: MyText2(name1: "File attached  ", name2: file)),
             ],
           ),
         ),
@@ -61,11 +81,13 @@ class _SummonsListState extends State<SummonsList> {
               left: 15,
               right: 15,
             ),
-            color: Colors.blue,
+            color:selectedSummons.contains(index)?Colors.green: Colors.blue,
             child: TextButton(
-              onPressed: () {},
-              child: const Text(
-                "ACCEPET SEMANCE",
+              onPressed:onTap,
+              child:Text(
+
+                selectedSummons.contains(index)?
+                "Accepted":'Accept Summons',
                 style: TextStyle(color: Colors.white),
               ),
             ))

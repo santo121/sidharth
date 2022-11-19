@@ -8,9 +8,9 @@ import 'package:sidarth_new/Widgets/widgets.dart';
 
 List<PoliceStationAddress>policeStationAddress = 
 [
-PoliceStationAddress(contactNumber: '0487 2632314', policeStationName: 'Anthikad Police station', siName: 'Raju kumar'),
-PoliceStationAddress(contactNumber: '0480 2632314', policeStationName: 'Irinjalkuda Police station', siName: 'Raju kumar'),
-PoliceStationAddress(contactNumber: '0484 2632314', policeStationName: 'Thrissur Police station', siName: 'Raju kumar')
+PoliceStationAddress(contactNumber: '0487 2632314', policeStationName: 'Anthikad Police station', siName: 'Raju kumar',address: "Anthikad police station\n\nAddress:Po anthikad,\n\n680641,Si name: raju kumar,\n\nPhone number: :9539247551"),
+PoliceStationAddress(contactNumber: '0480 2632314', policeStationName: 'Thrissur Police station', siName: 'Raju kumar',address: 'Thrissur police station\n\nAddress:Po Thrissur, 630621,\n\nSi name: babu raj,\n\nPhone number:9048545356'),
+PoliceStationAddress(contactNumber: '0484 2632314', policeStationName: 'chavakkadPolice station', siName: 'Raju kumar',address: "chavakkad police station\n\nAddress:Po chavakkad, 620610,\n\nSi name: ashiq usmaan,\n\nPhone number:9954377213")
 ];
 class ContactpoliceStation extends StatefulWidget {
   const ContactpoliceStation({super.key});
@@ -78,8 +78,16 @@ class MySearchOption extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Center(
-      child: Text(query),
+    return Container(
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(color: Color.fromARGB(255, 216, 216, 216),),
+      margin: EdgeInsets.all(30),
+      child: Row(
+        children: [
+         Text(query),
+        
+        ],
+      ),
     );
   }
 
@@ -93,7 +101,7 @@ class MySearchOption extends SearchDelegate {
         return ListTile(
           title: Text(suggestion.policeStationName),
           onTap: () {
-            query = suggestion.contactNumber;
+            query = suggestion.address;
             showResults(context);
           },
         );

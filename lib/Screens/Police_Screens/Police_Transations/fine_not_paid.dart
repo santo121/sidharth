@@ -2,9 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:sidarth_new/Functions/functions.dart';
+import 'package:sidarth_new/Screens/LoginScreens/User_login_Screen/addPhoneNumber/phonenumber.dart';
 import 'package:sidarth_new/Screens/Police_Screens/Fine%20Details/fine_to_summons_service.dart';
 import 'package:sidarth_new/Screens/Police_Screens/Police_Transations/fine_paid_details_service.dart';
+import 'package:sidarth_new/Widgets/police_bottomNav/bottomnav.dart';
 import 'package:sidarth_new/Widgets/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FineNotPaid extends StatelessWidget {
  FineNotPaid({super.key});
@@ -33,7 +36,9 @@ FinePaidDetailsService service = FinePaidDetailsService();
                         name: data[index].name.toString(),
                         offense: data[index].offenseId.toString(),
                         regNo: data[index].registernumber.toString(),
-                        typeOfTransaction: data[index].mode.toString()
+                        typeOfTransaction: data[index].mode.toString(),
+                        phoneNum: data[index].phoneNumber.toString(),
+
                         );
                         }
                         else return SizedBox();
@@ -61,6 +66,7 @@ FinePaidDetailsService service = FinePaidDetailsService();
     required String amount,
     required String typeOfTransaction,
     required String fineId,
+    required String phoneNum,
    }
   ) {
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
@@ -85,10 +91,13 @@ FinePaidDetailsService service = FinePaidDetailsService();
                   height: 15,
                 ),
                 MyText2(name1: "Reg No : ", width: 53, name2: regNo),
-                MyText2(name1: "Offense :", width: 50, name2:  offense),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: MyText2(name1: "Offense :", width: 50, name2:  offense)),
                 MyText2(name1: "Amount : ", width: 53, name2: amount),
                 MyText2(name1: "Type Of Transaction :", width: 20, name2:'online'),
-                IconButton(onPressed: () {}, icon: Icon(Icons.call))
+                MyText2(name1: "Phone number :", width: 20, name2:phoneNum),
+                IconButton(onPressed: (){_makePhoneCall(phoneNum);}, icon:const Icon(Icons.call))
               ],
             ),
           ),
@@ -99,16 +108,9 @@ FinePaidDetailsService service = FinePaidDetailsService();
                 FineToSummonsModal model = FineToSummonsModal(fineId: fineId);
                 FineToSummons service =FineToSummons();
                 service.sentFineToSummons(model).then((value) {
-                  log("success");
-                  return SnackBar(
-                  content: const Text('Successfully sent fine as summons'),
-                  // action: SnackBarAction(
-                  //   label: 'Undo',
-                  //   onPressed: () {
-                  //     // Some code to undo the change.
-                  //   },
-                  // ),
-                );
+                  log(value.statusCode.toString());
+                  value.statusCode==200?Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (ctx) => PoliceBottomNav(pageIndex: 2,)), (route) => false):log(value.statusCode.toString());
                 });
               },
               child: const Text(
@@ -118,5 +120,12 @@ FinePaidDetailsService service = FinePaidDetailsService();
             ),
           )
         ]);
+  }
+   Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
   }
 }

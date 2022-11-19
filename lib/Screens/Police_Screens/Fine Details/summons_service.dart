@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 class SummonsService{
 
   Future<dynamic> saveSummons(SummonsModel model)async{
-    const String uri = "";
+    const String uri = "https://penalty.gitdr.com/api/summons";
     final response = await http.post(Uri.parse(uri),body: model.toJson());
     switch(response.statusCode){
       case 200:
