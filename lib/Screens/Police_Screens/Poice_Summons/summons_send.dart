@@ -39,7 +39,7 @@ class SummonsSend extends StatelessWidget {
 
   Padding sendSummonsWidget(List<Data> response, int index)  {
     return Padding(
-                        padding: const EdgeInsets.all(35),
+                        padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
                         child: Column(children: [
                           Container(
                             padding: const EdgeInsets.all(20),
@@ -92,12 +92,18 @@ class SummonsSend extends StatelessWidget {
                                           .toString()),
                                 ),
                                         //! changes
-                                MyText2(
-                                    name1: "Address",
-                                    width: 53,
-                                    name2: response[index]
-                                        .address
-                                        .toString()),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: MyText2(
+                                      name1: "Address",
+                                      width: 53,
+                                      name2: response[index]
+                                          .address
+                                          .toString()),
+                                ),
+                               TextButton(onPressed: (){
+_launchUniversalLinkIos(Uri.parse('https://penalty.gitdr.com/public/${response[index].attachment}'));
+                               }, child:const Text("Summons attachment")),
                                 IconButton(
                                     onPressed: ()async {
                                       
@@ -114,6 +120,31 @@ class SummonsSend extends StatelessWidget {
                             ),
                           ),
                         ]),
+                        
                       );
   }
+
+  Future<void> _launchInWebViewWithoutDomStorage(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.inAppWebView,
+      webViewConfiguration: const WebViewConfiguration(enableDomStorage: true),
+    )) {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<void> _launchUniversalLinkIos(Uri url) async {
+    final bool nativeAppLaunchSucceeded = await launchUrl(
+      url,
+      mode: LaunchMode.externalNonBrowserApplication,
+    );
+    if (!nativeAppLaunchSucceeded) {
+      await launchUrl(
+        url,
+        mode: LaunchMode.inAppWebView,
+      );
+    }
+  }
+
 }

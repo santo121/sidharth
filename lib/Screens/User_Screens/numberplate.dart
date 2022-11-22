@@ -19,7 +19,7 @@ class Number extends StatelessWidget {
               return ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => UserHomeScreen(userId:myModel.rcModelList[index].rcId),
+                        builder: (context) => UserHomeScreen(userId:myModel.rcModelList[index].rcId,vehicleNumber:myModel.rcModelList[index].userVehicleNumber ),
                       ));
                     },
                     child: Text(myModel.rcModelList[index].userVehicleNumber));

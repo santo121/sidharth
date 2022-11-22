@@ -97,7 +97,7 @@ void dispose() {
                     final modelVal = snapshot.data!.data![index];
 
                       return finePayWidget(name:modelVal.name.toString() ,
-                       regNum: modelVal.toString(),
+                       regNum: modelVal.rcId.toString(),
                        offense: modelVal.offenseId.toString(),
                         amount: modelVal.amount.toString(),
                          typeOfTransfer: modelVal.mode.toString(),
@@ -169,13 +169,13 @@ required onTap
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      MyText2(name1: "Name:", width: 118, name2: name),
-                      MyText2(name1: "Reg No:", width: 110, name2: regNum),
+                      MyText2(name1: "Name", width: 118, name2: name),
+                      MyText2(name1: "Rc number", width: 110, name2: regNum),
                       SingleChildScrollView( 
                         scrollDirection: Axis.horizontal,
-                        child: MyText2(name1: "Offense:", width: 110, name2: offense)),
-                      MyText2(name1: "Amount:", width: 110, name2: amount),
-                      MyText2(name1: "Type of Transaction:", width: 35, name2: typeOfTransfer),
+                        child: MyText2(name1: "Offense", width: 110, name2: offense)),
+                      MyText2(name1: "Amount", width: 110, name2: amount),
+                      MyText2(name1: "Type of Transaction", width: 35, name2: typeOfTransfer),
                     ],
                   ),
                 ),

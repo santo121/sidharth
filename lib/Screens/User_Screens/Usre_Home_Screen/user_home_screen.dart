@@ -7,15 +7,16 @@ import 'package:sidarth_new/Screens/User_Screens/Usre_Home_Screen/list_of_summon
 import 'package:sidarth_new/Widgets/widgets.dart';
 
 class UserHomeScreen extends StatelessWidget {
-  const UserHomeScreen({super.key,required this.userId});
+  const UserHomeScreen({super.key,required this.userId,required this.vehicleNumber});
 final String userId;
+final String vehicleNumber;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
-        child: AppBar12(title: "kl", autoAppbar: true),
+        child: AppBar12(title: vehicleNumber, autoAppbar: true),
       ),
       body: Padding(
         padding: const EdgeInsets.all(30),

@@ -91,7 +91,9 @@ class SummonsNotPaid extends StatelessWidget {
                 
                 child: MyText2(name1: "Offense      ", width: 50, name2: offense)),
               //changes
-              MyText2(name1: "Address      ", width: 50, name2: address),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: MyText2(name1: "Address      ", width: 50, name2: address)),
               MyText2(name1: "Phone number ", width: 50, name2: phoneNumber),
               // MyText2(name1: "RC ID        ", width: 50, name2: rcId),
 

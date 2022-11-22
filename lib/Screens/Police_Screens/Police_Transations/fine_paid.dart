@@ -54,11 +54,16 @@ FinePaidDetailsService service = FinePaidDetailsService();
                               const SizedBox(
                                 height: 15,
                               ),
-                              MyText2(name1: "RC No :", width: 90, name2:data[index].registernumber.toString()),
-                              MyText2(name1: "Offense :", width: 90, name2:data[index].offenseId.toString()),
-                              MyText2(name1: "Amount :", width: 91, name2: data[index].amount.toString() ),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                
+                                child: MyText2(name1: "Registration Number ", width: 90, name2:data[index].registernumber.toString())),
+                              MyText2(name1: "Offense ", width: 90, name2:data[index].offenseId.toString()),
+                              MyText2(name1: "Amount ", width: 91, name2: data[index].amount.toString() ),
                               MyText2(name1: "Type Of Transaction", width: 20, name2: data[index].mode.toString() ),
-                              MyText2(name1: "Phone number", width: 53, name2: data[index].phoneNumber.toString() )
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: MyText2(name1: "Phone number", width: 53, name2: data[index].phoneNumber.toString() ))
                             ],
                           ),
                         );

@@ -71,7 +71,7 @@ FinePaidDetailsService service = FinePaidDetailsService();
   ) {
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
           Container(
-            margin: EdgeInsets.only(top: 20),
+            margin:const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.all(20),
             color: Colors.white,
             child: Column(
@@ -90,13 +90,17 @@ FinePaidDetailsService service = FinePaidDetailsService();
                 const SizedBox(
                   height: 15,
                 ),
-                MyText2(name1: "Reg No : ", width: 53, name2: regNo),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: MyText2(name1: "Offense :", width: 50, name2:  offense)),
-                MyText2(name1: "Amount : ", width: 53, name2: amount),
-                MyText2(name1: "Type Of Transaction :", width: 20, name2:'online'),
-                MyText2(name1: "Phone number :", width: 20, name2:phoneNum),
+                  child: MyText2(name1: "Registration number", width: 53, name2: regNo)),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: MyText2(name1: "Offense", width: 50, name2:  offense)),
+                MyText2(name1: "Amount", width: 53, name2: amount),
+                MyText2(name1: "Type Of Transaction", width: 20, name2:'online'),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: MyText2(name1: "Phone number", width: 20, name2:phoneNum)),
                 IconButton(onPressed: (){_makePhoneCall(phoneNum);}, icon:const Icon(Icons.call))
               ],
             ),
