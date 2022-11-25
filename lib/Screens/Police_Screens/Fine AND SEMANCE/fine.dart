@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:sidarth_new/Functions/storage.dart';
 import 'package:sidarth_new/Screens/Police_Screens/Fine%20AND%20SEMANCE/final_model_service.dart';
 import 'package:sidarth_new/Widgets/widgets.dart';
 class Fine extends StatefulWidget {
@@ -89,11 +92,13 @@ void dispose() {
           Expanded(child: FutureBuilder(
               future: serviceModel.fineService(userId: widget.userId),
               builder: (context, snapshot){
-                  
                   if(snapshot.hasData){
                      return ListView.builder(
                     itemCount: snapshot.data!.data!.length,
                     itemBuilder: (BuildContext context, int index) {
+                      log(index.toString());
+                  LocalStorage.setNotificationIndex(snapshot.data!.data!.length,);
+
                     final modelVal = snapshot.data!.data![index];
 
                       return finePayWidget(name:modelVal.name.toString() ,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sidarth_new/Functions/storage.dart';
 import 'package:sidarth_new/Screens/User_Screens/Usre_Home_Screen/list%20of%20summons%20service/user_summons_list.dart';
 import 'package:sidarth_new/Widgets/widgets.dart';
 import 'package:sidarth_new/cont_file.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SummonsList extends StatefulWidget {
   SummonsList({super.key, required this.rcId});
@@ -12,7 +14,7 @@ class SummonsList extends StatefulWidget {
 
 class _SummonsListState extends State<SummonsList> {
   UserSummonsListService rcSummons = UserSummonsListService();
-  List<int> selectedSummons=[];
+  List<int> selectedSummons = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,24 +25,26 @@ class _SummonsListState extends State<SummonsList> {
       body: FutureBuilder(
         future: rcSummons.getUserSummonsList(widget.rcId),
         builder: (context, snapshot) {
+
           if (snapshot.hasData) {
             return ListView.builder(
                 itemCount: snapshot.data!.data!.length,
                 itemBuilder: (context, index) {
                   final data = snapshot.data!.data!;
+            LocalStorage.setNotificationIndexFine(snapshot.data!.data!.length);
+
                   // data[index].
-                  return acceptSummons(data[index].name.toString(),
+                  return acceptSummons(
+                      data[index].name.toString(),
                       data[index].offenseId.toString(),
-                    data[index].date.toString(),
-                    data[index].phoneNumber.toString(),
-                    data[index].rcId.toString(),
-                    data[index].attachment.toString(),
-                    (){
-                      setState(() {
-                        selectedSummons.add(index);
-                      });
-                    },index
-                      );
+                      data[index].date.toString(),
+                      data[index].phoneNumber.toString(),
+                      data[index].rcId.toString(),
+                      data[index].attachment.toString(), () {
+                    setState(() {
+                      selectedSummons.add(index);
+                    });
+                  }, index);
                 });
           } else {
             return const Center(child: CircularProgressIndicator());
@@ -50,8 +54,28 @@ class _SummonsListState extends State<SummonsList> {
     );
   }
 
-  Widget acceptSummons(String name, String offense, String date,
-      String phoneNumber, String registerNumber, String file,onTap,int index) {
+  Future<void> _launchUniversalLinkIos(Uri url) async {
+    final bool nativeAppLaunchSucceeded = await launchUrl(
+      url,
+      mode: LaunchMode.externalNonBrowserApplication,
+    );
+    if (!nativeAppLaunchSucceeded) {
+      await launchUrl(
+        url,
+        mode: LaunchMode.inAppWebView,
+      );
+    }
+  }
+
+  Widget acceptSummons(
+      String name,
+      String offense,
+      String date,
+      String phoneNumber,
+      String registerNumber,
+      String file,
+      onTap,
+      int index) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -70,9 +94,16 @@ class _SummonsListState extends State<SummonsList> {
                   scrollDirection: Axis.horizontal,
                   child: Container(
                       child: MyText2(name1: "Offense  ", name2: offense))),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: MyText2(name1: "File attached  ", name2: file)),
+              TextButton(
+                  onPressed: () {
+                    _launchUniversalLinkIos(
+                        Uri.parse('https://penalty.gitdr.com/public/$file'));
+                  },
+                  child: const Text('Summons attachment')),
+
+              // SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: MyText2(name1: "File attached  ", name2: file)),
             ],
           ),
         ),
@@ -81,13 +112,11 @@ class _SummonsListState extends State<SummonsList> {
               left: 15,
               right: 15,
             ),
-            color:selectedSummons.contains(index)?Colors.green: Colors.blue,
+            color: selectedSummons.contains(index) ? Colors.green : Colors.blue,
             child: TextButton(
-              onPressed:onTap,
-              child:Text(
-
-                selectedSummons.contains(index)?
-                "Accepted":'Accept Summons',
+              onPressed: onTap,
+              child: Text(
+                selectedSummons.contains(index) ? "Accepted" : 'Accept Summons',
                 style: TextStyle(color: Colors.white),
               ),
             ))

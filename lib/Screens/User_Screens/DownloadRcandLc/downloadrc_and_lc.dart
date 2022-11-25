@@ -25,19 +25,19 @@ class _DownLoadRcAndLcState extends State<DownLoadRcAndLc>
     return Scaffold(
       backgroundColor: primaryColor,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
+        preferredSize:const Size.fromHeight(60),
         child: AppBar12(title: "DownLoad Rc And Lc", autoAppbar: true),
       ),
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           TabBar(
               unselectedLabelColor: Colors.grey,
               labelColor: Colors.white,
               controller: tabcontroller,
-              tabs: [
+              tabs:const [
                 Tab(
                   text: "Rc Book",
                 ),

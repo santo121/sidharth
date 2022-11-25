@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sidarth_new/Functions/functions.dart';
+import 'package:sidarth_new/Screens/User_Screens/DownloadRcandLc/rc_book_details.dart';
 import 'package:sidarth_new/Widgets/widgets.dart';
 
 class Licence extends StatelessWidget {
@@ -19,6 +20,18 @@ class Licence extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(onPressed: (){
+                  
+                   Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const RcBookHistory()),
+  );
+                }, child:const Text('View RC BOOK')),
+              ],
+            ),
             TextField(
               onChanged: (value) {
                 licensenumber = int.parse(value);
@@ -32,19 +45,8 @@ class Licence extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
-            TextField(
-              onChanged: (value) {
-                dateofbirth = int.parse(value);
-              },
-              decoration: const InputDecoration(
-                  hintText: "Date of birth",
-                  fillColor: Colors.white,
-                  filled: true,
-                  border: OutlineInputBorder()),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
+           
+           
             ElevatedButton(
                 onPressed: () {
                   license(context);

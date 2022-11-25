@@ -24,12 +24,9 @@ class _SplashScreenState extends State<SplashScreen> {
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Center(
-              child: Text(
-                "SplashScreen",
-                style: TextStyle(color: Colors.white),
-              ),
+              child: Image.asset('Image/Logo.jpg')
             )
           ],
         ),

@@ -16,3 +16,5 @@ String userSummonsList({required String id}) => "https://$ipAddress/api/summons_
 String policeSummonsApi({required String id}) => "https://$ipAddress/api/summons_station?station_id=$id";
 String fineToSummons() => "https://$ipAddress/api/fine_to_summons";
 String attachFile() => "https://$ipAddress/api/summons_attachfile";
+String rcResponse({required String registrationNum,required String engineNum}) => 'https://penalty.gitdr.com/api/rc?registernumber=$registrationNum&engineno=$engineNum';
+String lcResponse({required String licenseNumber}) => 'https://penalty.gitdr.com/api/lc?licensenumber=$licenseNumber';
